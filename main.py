@@ -1,10 +1,10 @@
-import kivy
-from kivy.app import App
-from kivy.uix.label import Label
+from kivymd.app import MDApp
+from kivymd.uix.label import MDLabel
 
-class MyApp(App):
+class FridgeNotesApp(MDApp):
     def build(self):
-        return Label(text="Jenny Mai")
+        label = MDLabel(text='Welcome to FridgeNotes!', halign='center')
+        return label
 
 if __name__ == "__main__":
-    MyApp().run()
+    FridgeNotesApp().run()
