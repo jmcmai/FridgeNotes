@@ -1,72 +1,34 @@
 # TODO: make functions/classes for button presses
-# TODO: 
 # TODO: make ui look a lot better
 # TODO: make a class for each item with data: name of item & expiry date
 # TODO: make create item screen
 
+#:include kv/loginscreen.kv
+#:include kv/signupscreen.kv
+#:include kv/listscreen.kv
+#:include kv/userinputscreen.kv
+
+
 <ScreenManagement>:
     LoginScreen:
+        id: login_screen
         name: 'login_screen'
     LoginScreenSuccess:
+        id: login_screen_success
         name: "login_screen_success"
     SignUpScreen:
+        id: sign_up_screen
         name: 'sign_up_screen'
     SignUpScreenSuccess:
+        id: sign_up_screen_success
         name: "sign_up_screen_success"
     ListScreen:
+        id: list_screen
         name: 'list_screen'
-    
-<LoginScreen>:
-    MDScreen:
-        md_bg_color: app.theme_cls.primary_color
-        MDCard:
-            orientation: 'vertical'
-            size_hint: None, None
-            size: 600, 800
-            pos_hint: {"center_x":.5, "center_y":.5}
-            elevation: 15
-            padding: 20
-            spacing: 30
-            # Adding items to card:
-            MDFloatLayout:
-                MDIcon:
-                    id: fridgeicon
-                    size_hint_x: .9
-                    halign: 'center'
-                    pos_hint: {"center_x": .5, "center_y":.9}
-                    icon: 'fridge'
-                MDLabel:
-                    id: title
-                    text: 'FridgeNotes'
-                    theme_font_style: 'H2'
-                    halign: 'center'
-                    pos_hint: {"center_x": .5, "center_y":.8}
-                MDTextField:
-                    id: email
-                    size_hint_x: .9
-                    pos_hint: {"center_x": .5, "top": .6}
-                    hint_text: "Email"
-                MDTextField:
-                    id: password
-                    size_hint_x: .9
-                    pos_hint: {"center_x": .5, "top": .5}
-                    hint_text: "Password"
-                MDRaisedButton:
-                    id: signin
-                    text: "Sign in"
-                    md_bg_color: app.theme_cls.primary_color
-                    pos_hint: {"center_x": .5, "top": .35}
-                    on_release:
-                         # root.add_user(root.ids.username.text, root.ids.password.text) 
-                        root.manager.current = 'list_screen'
-                        root.manager.transition.direction = 'left'
-                MDRaisedButton:
-                    id: signup
-                    text: "Sign up here"
-                    md_bg_color: app.theme_cls.primary_color
-                    pos_hint: {"center_x": .5, "top": .2}
-                    on_release: 
-                        root.sign_up()
+    UserInputScreen:
+        id: user_input_screen
+        name: 'user_input_screen'
+
 
 <LoginScreenSuccess>:
     GridLayout:
@@ -83,58 +45,6 @@
         Label:
             text:""
 
-<SignUpScreen>:
-    MDScreen:
-        id: screen
-        md_bg_color: app.theme_cls.primary_color
-        MDCard:
-            id: card
-            orientation: 'vertical'
-            size_hint: None, None
-            size: 600, 800
-            pos_hint: {"center_x":.5, "center_y":.5}
-            elevation: 15
-            padding: 20
-            spacing: 30
-            # Adding items to signup card:
-            MDFloatLayout:
-                MDIcon:
-                    id: fridgeicon
-                    size_hint_x: .9
-                    halign: 'center'
-                    pos_hint: {"center_x": .5, "center_y":.9}
-                    icon: 'fridge'
-                MDLabel:
-                    id: label
-                    text: 'Sign Up'
-                    theme_font_style: 'H2'
-                    halign: 'center'
-                    pos_hint: {"center_x": .5, "center_y":.8}
-                MDTextField:
-                    id: name
-                    size_hint_x: .9
-                    pos_hint: {"center_x": .5, "top": .7}
-                    hint_text: "Name"
-                MDTextField:
-                    id: newemail
-                    size_hint_x: .9
-                    pos_hint: {"center_x": .5, "top": .6}
-                    hint_text: "New email"
-                MDTextField:
-                    id: newpassword
-                    size_hint_x: .9
-                    pos_hint: {"center_x": .5, "top": .5}
-                    hint_text: "New Password"
-                MDRaisedButton:
-                    id: signup
-                    text: "Sign up"
-                    md_bg_color: app.theme_cls.primary_color
-                    pos_hint: {"center_x": .5, "top": .35}
-                    on_release: 
-                        root.add_user(root.ids.username.text, root.ids.password.text)
-                        root.manager.current = 'list' 
-                        root.manager.transition.direction = 'left'
-
 <SignUpScreenSuccess>:
     GridLayout:
         cols:1
@@ -144,22 +54,7 @@
             text: "Login page"
             on_press: rppt.go_to_login()
 
-<ListScreen>:
-    AnchorLayout:
-        anchor_x: 'center'
-        anchor_y: 'top'
-        MDToolbar:
-            id: toolbar
-            title: 'Your refrigerator'
-            left_action_items: [['menu', lambda x: print("You pressed the menu")]]
-            right_action_items:[['dots-vertical', lambda x: print("You pressed the dots")]]
-    MDRaisedButton:
-        halign: 'center'
-        text: 'back to sign in'
-        on_press: 
-            root.manager.current = 'login_screen'
-            root.manager.transition.direction = 'right'
-    # Add item cards for later
+
             
 
 

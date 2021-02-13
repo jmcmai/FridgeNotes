@@ -1,0 +1,47 @@
+<UserInputScreen>:
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'top'
+        MDToolbar:
+            id: toolbar
+            title: 'Add New Item'
+            left_action_items: [['menu', lambda x: print("You pressed the menu")]]
+            right_action_items:[['dots-vertical', lambda x: print("You pressed the dots")]]
+        MDFloatLayout:
+            MDTextField:
+                hint_text: "Enter Grocery Item"
+                helper_text: "or forgot the name of the grocery item"
+                helper_text_mode: "on_focus"
+                icon_right: "food"
+                icon_right_color: app.theme_cls.primary_color
+                pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+                size_hint_x: .7
+                width: 200
+                max_text_length: 12
+                required: True
+                # line_color_normal: 1, 1, 0, 1
+            MDTextField:
+                hint_text: "some extra note"
+                helper_text: "or don't need to add anything"
+                helper_text_mode: "on_focus"
+                icon_right: "note"
+                icon_right_color: app.theme_cls.primary_color
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                size_hint_x: .7
+                max_length: 50
+                width: 200
+                line_color_normal: 7, 1, 0, 1   
+            MDRaisedButton:
+                # hint_text: "Choose Expiry Date"
+                # helper_text: "or forgot the date"
+                # helper_text_mode: "on_focus"
+                # icon_right: "calendar-multiple-check"
+                # icon_right_color: app.theme_cls.primary_color
+                text: 'Choose Expiration date'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+                size_hint_x: None
+                on_release:
+                    app.show_datepicker()
+                #width: 200
+                #line_color_normal: 2, 1, 0, 1
+                #required: True
