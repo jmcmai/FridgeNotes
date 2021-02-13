@@ -7,7 +7,7 @@ import random
 
 Builder.load_file('loginscreen.kv')
 
-class loginScreen(Screen):
+class LoginScreen(Screen):
     def sign_up(self):
         self.manager.current = "sign_up_screen"
 
