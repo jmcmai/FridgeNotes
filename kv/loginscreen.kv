@@ -25,10 +25,10 @@
                     halign: 'center'
                     pos_hint: {"center_x": .5, "center_y":.8}
                 MDTextField:
-                    id: email
+                    id: username
                     size_hint_x: .9
                     pos_hint: {"center_x": .5, "top": .65}
-                    hint_text: "Email"
+                    hint_text: "Username"
                 MDTextField:
                     id: password
                     size_hint_x: .9
@@ -40,9 +40,7 @@
                     md_bg_color: app.theme_cls.primary_color
                     pos_hint: {"center_x": .5, "top": .35}
                     on_release:
-                         # root.add_user(root.ids.username.text, root.ids.password.text) 
-                        root.manager.current = 'list_screen'
-                        root.manager.transition.direction = 'left'
+                        app.login(root.ids['username'].text, root.ids['password'].text)
                 MDRaisedButton:
                     id: signup
                     text: "Sign up here"
@@ -50,3 +48,9 @@
                     pos_hint: {"center_x": .5, "top": .2}
                     on_release: 
                         root.manager.current = 'sign_up_screen'
+                MDLabel:
+                    id: wrong_login
+                    text: ''
+                    theme_font_style: 'Button'
+                    theme_text_color: 'Error'
+                    pos_hint: {"center_x": .55, "top": .55}
