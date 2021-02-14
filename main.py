@@ -4,48 +4,23 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.uix.picker import MDDatePicker
 import requests
 import json
+from myfirebase import MyFirebase
 from datetime import date, datetime
 import random
+import traceback
 from itemlist import ItemList
 
 class LoginScreen(Screen):
-    # def sign_up(self):
-    #     self.manager.current = "sign_up_screen"
-
-    # def login(self, uname, pword):
-    #     with open("users.json") as file:
-    #         users = json.load(file)
-    #     if uname in users and users[uname]['password'] == pword:
-    #         self.manager.current = 'login_screen_success'
-    #     else:
-    #         self.ids.login_wrong.text = "Wrong username or password!"
     pass
 
 class LoginScreenSuccess(Screen):
-    def log_out(self):
-
-        self.manager.transition.direction = 'right'
-        self.manager.current = "login_screen"
+    pass
 
 class SignUpScreen(Screen):
-    # def add_user(self, uname, pword):
-    #     with open ("users.json") as file:
-    #         users = json.load(file)
-    #     print(users)
-
-    #     users[uname] = {'username': uname, 'password': pword,
-    #             'created':datetime.now().strftime("%Y-%m-%D %H-%M-%S")}
-
-    #     with open("users.json", 'w') as file:
-    #         json.dump(users, file)
-    #     self.manager.current = "sign_up_screen_success"
     pass
 
 class SignUpScreenSuccess(Screen):
-    def go_to_login(self):
-
-        self.manager.transition.direction = 'right'
-        self.manager.current = "login_screen"
+    pass
 
 class ListScreen(Screen):
     pass
@@ -59,33 +34,35 @@ class ScreenManagement(ScreenManager):
 
 
 class MainApp(MDApp):
-    userid = 'user1' #TESTING WITH USER1
+    refresh_token_file = "refresh_token.txt"
     date = ''
 
     def build(self):
+        self.my_firebase = MyFirebase()
         return ScreenManagement()
 
     def on_start(self):
-        #get database data
-        result = requests.get("https://fridgenotes-f5c47-default-rtdb.firebaseio.com/" + str(self.userid) + ".json")
-        print("accepted?", result.ok)
-        data = json.loads(result.content.decode())
-        print(data)
-        fridge = data['fridge']
-    
-        #populate fridge data in list screen
-
-        # layout = self.root.ids['list_screen'].ids['list_layout']
-        # for category, items in fridge.items():
-        #     category_items = data['fridge'][category]
-        #     print("Category: " + category + " Items: ")
-        #     for items in category_items[1:]:
-        #         I = ItemList(name=items['name']) # creates card
-        #         layout.add_widget(I)
-
-                # print(items['name'])
-                # print(items['expirydate'])
-                # print(items['quantity'])
+        try:
+            # Try to read the persistent signin credentials (refresh token)
+            with open(self.refresh_token_file, 'r') as f:
+                refresh_token = f.read()
+            # Use refresh token to get a new idToken
+            id_token, local_id = self.my_firebase.exchange_refresh_token(refresh_token)
+            self.local_id = local_id
+            self.id_token = id_token
+            #get data from database
+            data = self.my_firebase.get_database_data(self.local_id)
+            #populate fridge data in list screen
+            layout = self.root.ids['list_screen'].ids['list_layout']
+            for key in data:
+                name = data[key]['name']
+                exp_date = data[key]['expiration date']
+                quantity = data[key]['quantity']
+                I = ItemList(name=name, exp_date=exp_date) # creates card
+                layout.add_widget(I)
+        except Exception as e:
+            traceback.print_exc()
+            pass
 
     # date picker for items
     def show_datepicker(self):
@@ -105,6 +82,7 @@ class MainApp(MDApp):
         quantity = self.root.ids['user_input_screen'].ids["quantity"].text
         try:
             print(grocery_item, notes, quantity, str(date))
+            self.root.current = 'list_screen'
         except:
             print("fill in all parts!")
 
