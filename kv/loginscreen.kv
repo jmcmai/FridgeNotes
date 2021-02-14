@@ -2,55 +2,56 @@
     MDScreen:
         id: screen
         md_bg_color: app.theme_cls.primary_color
-        MDCard:
-            orientation: 'vertical'
-            size_hint: None, None
-            size: 600, 800
-            pos_hint: {"center_x":.5, "center_y":.5}
-            elevation: 15
-            padding: 20
-            spacing: 30
-            # Adding items to card:
-            MDFloatLayout:
-                MDIcon:
-                    id: fridgeicon
-                    size_hint_x: .9
-                    halign: 'center'
-                    pos_hint: {"center_x": .5, "center_y":.9}
-                    icon: 'fridge'
-                MDLabel:
-                    id: title
-                    text: 'FridgeNotes'
-                    theme_font_style: 'H2'
-                    halign: 'center'
-                    pos_hint: {"center_x": .5, "center_y":.8}
-                MDTextField:
-                    id: login_email
-                    size_hint_x: .9
-                    pos_hint: {"center_x": .5, "top": .65}
-                    hint_text: "Email"
-                MDTextField:
-                    id: login_password
-                    size_hint_x: .9
-                    pos_hint: {"center_x": .5, "top": .5}
-                    hint_text: "Password"
-                MDRaisedButton:
-                    id: signin
-                    text: "Sign in"
-                    md_bg_color: app.theme_cls.primary_color
-                    pos_hint: {"center_x": .5, "top": .35}
-                    on_release:
-                        app.my_firebase.sign_in(login_email.text, login_password.text) 
-                MDRaisedButton:
-                    id: signup
-                    text: "Sign up here"
-                    md_bg_color: app.theme_cls.primary_color
-                    pos_hint: {"center_x": .5, "top": .2}
-                    on_release: 
-                        root.manager.current = 'sign_up_screen'
-                MDLabel:
-                    id: wrong_login
-                    text: ''
-                    theme_font_style: 'Button'
-                    theme_text_color: 'Error'
-                    pos_hint: {"center_x": .55, "top": .55}
+    MDCard:
+        orientation: 'vertical'
+        size_hint: None, None
+        size: 600, 800
+        pos_hint: {"center_x":.5, "center_y":.5}
+        elevation: 15
+        padding: 20
+        spacing: 30
+        # Adding items to card:
+        MDFloatLayout:
+            Image:
+                id: fridge_image
+                source: 'icons/fridge.png'
+                size_hint_x: .3
+                halign: 'center'
+                pos_hint: {"center_x": .5, "center_y":.9}
+                icon: 'fridge'
+            MDLabel:
+                id: title
+                text: 'FridgeNotes'
+                theme_font_style: 'Subtitle2'
+                halign: 'center'
+                pos_hint: {"center_x": .5, "center_y":.75}
+            MDTextField:
+                id: login_email
+                size_hint_x: .9
+                pos_hint: {"center_x": .5, "top": .65}
+                hint_text: "Email"
+            MDTextField:
+                id: login_password
+                size_hint_x: .9
+                pos_hint: {"center_x": .5, "top": .5}
+                hint_text: "Password"
+            MDRaisedButton:
+                id: signin
+                text: "Sign in"
+                md_bg_color: app.theme_cls.primary_color
+                pos_hint: {"center_x": .5, "top": .35}
+                on_release:
+                    app.my_firebase.sign_in(login_email.text, login_password.text) 
+            MDRaisedButton:
+                id: signup
+                text: "Sign up here"
+                md_bg_color: app.theme_cls.primary_color
+                pos_hint: {"center_x": .5, "top": .2}
+                on_release: 
+                    root.manager.current = 'sign_up_screen'
+            MDLabel:
+                id: wrong_login
+                text: ''
+                theme_font_style: 'Button'
+                theme_text_color: 'Error'
+                pos_hint: {"center_x": .8, "top": .55}

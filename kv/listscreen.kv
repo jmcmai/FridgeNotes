@@ -7,12 +7,17 @@
             title: 'Your refrigerator'
             left_action_items: [['fridge', lambda x: print('you pressed the menu button!')]]
             right_action_items:[['dots-vertical', lambda x: print("You pressed the dots")]]
-    MDGridLayout:
-        id: list_layout
-        cols: 1
-        pos_hint: {"top": .89, "left": 1}
-        size_hint: 1, .2
-        spacing: 145
+    ScrollView:
+        pos_hint: {"top": .95, "left": 1}
+        size_hint: 1, 1
+        MDGridLayout:
+            id: list_layout
+            cols: 1
+            spacing: 20
+            size_hint_y: None
+            height: self.minimum_height
+            row_default_height: 150
+            row_force_default: True
     MDFloatLayout:
         orientation: 'vertical'  
         MDFloatingActionButton:
@@ -23,4 +28,3 @@
             on_press: 
                 root.manager.current = 'user_input_screen'
                 root.manager.transition.direction = 'left'
-    # Add item cards for later

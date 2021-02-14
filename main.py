@@ -29,6 +29,9 @@ class ListScreen(Screen):
 class UserInputScreen(Screen):
     pass
 
+class EditItemScreen(Screen):
+    pass
+
 class ScreenManagement(ScreenManager):
     pass
 
@@ -38,6 +41,7 @@ class MainApp(MDApp):
 
     def build(self):
         self.my_firebase = MyFirebase()
+        self.theme_cls.primary_palette = "Orange"
         return ScreenManagement()
     
     def signed_in(self):
@@ -49,8 +53,9 @@ class MainApp(MDApp):
         for key in data:
             name = data[key]['name']
             exp_date = data[key]['expiration date']
+            extra_notes = data[key]['notes']
             quantity = data[key]['quantity']
-            I = ItemList(name=name, exp_date=exp_date) # creates card
+            I = ItemList(name=name, exp_date=exp_date, extra_notes=extra_notes, quantity=quantity) # creates card
             layout.add_widget(I)
 
     # date picker for items
@@ -66,7 +71,6 @@ class MainApp(MDApp):
           
     # gets information from adding items
     def update_database(self):
-        print(self.date)
         self.root.ids['user_input_screen'].ids['expiry_date'].text = "Expiration Date: " + self.date
         grocery_item = self.root.ids['user_input_screen'].ids["grocery_item"].text
         notes = self.root.ids['user_input_screen'].ids["extra_notes"].text
@@ -75,14 +79,11 @@ class MainApp(MDApp):
             self.root.ids['user_input_screen'].ids['invalid_items'].text = "Please fill out all fields."
         else:
             update_items = {'name':grocery_item, 'notes':notes, 'quantity':quantity, 'expiration date':self.date}
-            #self.my_firebase.db.collection(self.localId).add(data)
             self.my_firebase.db.collection(self.local_id).add(update_items)
             layout = self.root.ids['list_screen'].ids['list_layout']
-            I = ItemList(name=grocery_item, exp_date=self.date) # creates card
+            I = ItemList(name=grocery_item, exp_date=self.date, extra_notes=notes, quantity=quantity) # creates card
             layout.add_widget(I)
             self.root.current = 'list_screen'
-
-
 
 if __name__ == "__main__":
     MainApp().run()

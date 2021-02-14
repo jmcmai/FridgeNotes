@@ -13,9 +13,10 @@
             spacing: 30
             # Adding items to signup card:
             MDFloatLayout:
-                MDIcon:
-                    id: fridgeicon
-                    size_hint_x: .9
+                Image:
+                    id: fridge_image
+                    source: 'icons/fridge.png'
+                    size_hint_x: .3
                     halign: 'center'
                     pos_hint: {"center_x": .5, "center_y":.9}
                     icon: 'fridge'
@@ -24,16 +25,16 @@
                     text: 'Sign Up'
                     theme_font_style: 'H2'
                     halign: 'center'
-                    pos_hint: {"center_x": .5, "center_y":.8}
-                MDTextField:
-                    id: newname
-                    size_hint_x: .9
-                    pos_hint: {"center_x": .5, "top": .7}
-                    hint_text: "Name"
+                    pos_hint: {"center_x": .5, "center_y":.7}
+                #MDTextField:                       #TODO: implement name/profile later
+                    #id: newname
+                    #size_hint_x: .9
+                    #pos_hint: {"center_x": .5, "top": .7}
+                    #hint_text: "Name"
                 MDTextField:
                     id: new_email
                     size_hint_x: .9
-                    pos_hint: {"center_x": .5, "top": .6}
+                    pos_hint: {"center_x": .5, "top": .65}
                     hint_text: "New email"
                 MDTextField:
                     id: new_password
@@ -60,4 +61,4 @@
                     text: ''
                     theme_font_style: 'Button'
                     theme_text_color: 'Error'
-                    pos_hint: {"center_x": .55, "top": .55}
+                    pos_hint: {"center_x": .8, "top": .55}
