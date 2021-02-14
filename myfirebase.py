@@ -61,17 +61,16 @@ class MyFirebase():
         if signin_request.ok == True:
             refresh_token = sign_up_data['refreshToken']
             localId = sign_up_data['localId']
+            print(localId)
             idToken = sign_up_data['idToken']
-            # Save refreshToken to a file
-            with open(app.refresh_token_file, "w") as f:
-                f.write(refresh_token)
 
             # Save localId to a variable in main app class
             # Save idToken to a variable in main app class
             app.local_id = localId
             app.id_token = idToken
 
-            app.root.current = 'list_screen'
+            app.signed_in()
+            App.get_running_app().root.current = 'list_screen'
             print('true!')
         elif signin_request.ok == False:
             error_data = json.loads(signin_request.content.decode())
@@ -89,6 +88,7 @@ class MyFirebase():
                 grocery_items.update(temp)
                 item_number += 1
         return grocery_items
+
                 
 
 
