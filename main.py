@@ -110,7 +110,6 @@ class MainApp(MDApp):
 
     #checks user sign-in
     def login(self, uname, pword):
-        #Change path directory to where you store your users.json file (probably users.json only)
         with open("users.json") as file:
             users = json.load(file)
         if uname in users and users[uname]['password'] == pword:
@@ -122,7 +121,6 @@ class MainApp(MDApp):
 
     #adds a new user
     def add_user(self, uname, email, pword):
-        #Change path directory to where you store your users.json file (probably users.json only)
         with open ("users.json") as file:
             users = json.load(file)
         print(users)
