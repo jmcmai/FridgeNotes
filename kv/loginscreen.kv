@@ -25,12 +25,12 @@
                     halign: 'center'
                     pos_hint: {"center_x": .5, "center_y":.8}
                 MDTextField:
-                    id: username
+                    id: login_email
                     size_hint_x: .9
                     pos_hint: {"center_x": .5, "top": .65}
-                    hint_text: "Username"
+                    hint_text: "Email"
                 MDTextField:
-                    id: password
+                    id: login_password
                     size_hint_x: .9
                     pos_hint: {"center_x": .5, "top": .5}
                     hint_text: "Password"
@@ -40,7 +40,7 @@
                     md_bg_color: app.theme_cls.primary_color
                     pos_hint: {"center_x": .5, "top": .35}
                     on_release:
-                        app.login(root.ids['username'].text, root.ids['password'].text)
+                        app.my_firebase.sign_in(login_email.text, login_password.text) 
                 MDRaisedButton:
                     id: signup
                     text: "Sign up here"

@@ -1,16 +1,19 @@
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.floatlayout import FloatLayout
+from kivymd.uix.gridlayout import MDGridLayout
+from kivymd.uix.floatlayout import MDFloatLayout
+from kivymd.uix.list import TwoLineListItem
 
-from kivy.uix.label import Label
+from kivymd.uix.label import MDLabel
 
-class ItemList(GridLayout):
-
-    def __init(self, **kwargs):
+class ItemList(MDGridLayout):
+    rows = 1
+    def __init__(self, **kwargs):
         super(ItemList, self).__init__()
 
-        #need words
-        words = FloatLayout()
-        words_label = Label(text=kwargs['name'], size_hint={1, .2}, pos_hint={"top": .2})
-        words.add_widget(words_label)
+        #need left float layout
+        left = MDFloatLayout()
+        left_list = TwoLineListItem(text=kwargs['name'], secondary_text='Expiration Date:' + kwargs['exp_date'], pos_hint={"top":.5})
+        # left_label = MDLabel(text=kwargs['name'], size_hint=(1, .2), pos_hint={"top": .2, "left": 1})
+        left.add_widget(left_list)
+        # words.add_widget(left_label)
 
-        self.add_widget(words)
+        self.add_widget(left)

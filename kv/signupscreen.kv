@@ -31,12 +31,12 @@
                     pos_hint: {"center_x": .5, "top": .7}
                     hint_text: "Name"
                 MDTextField:
-                    id: newemail
+                    id: new_email
                     size_hint_x: .9
                     pos_hint: {"center_x": .5, "top": .6}
                     hint_text: "New email"
                 MDTextField:
-                    id: newpassword
+                    id: new_password
                     size_hint_x: .9
                     pos_hint: {"center_x": .5, "top": .5}
                     hint_text: "New Password"
@@ -45,8 +45,9 @@
                     text: "Sign up"
                     md_bg_color: app.theme_cls.primary_color
                     pos_hint: {"center_x": .5, "top": .35}
-                    on_release: 
-                        app.add_user(root.ids['newname'].text, root.ids['newemail'].text, root.ids['newpassword'].text)
+                    on_release:
+                        app.my_firebase.sign_up(new_email.text, new_password.text) 
+                        #app.add_user(root.ids['newname'].text, root.ids['newemail'].text, root.ids['newpassword'].text)
                 MDRaisedButton:
                     id: back
                     text: "Back"

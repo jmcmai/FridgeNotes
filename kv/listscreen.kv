@@ -5,20 +5,18 @@
         MDToolbar:
             id: toolbar
             title: 'Your refrigerator'
-            left_action_items: [['menu', lambda x: print("You pressed the menu")]]
+            left_action_items: [['fridge', lambda x: print('you pressed the menu button!')]]
             right_action_items:[['dots-vertical', lambda x: print("You pressed the dots")]]
-    MDBoxLayout: #list of items in fridge
+    MDGridLayout:
         id: list_layout
-        orientation: 'vertical'
-        
+        cols: 1
+        pos_hint: {"top": .89, "left": 1}
+        size_hint: 1, .2
+        spacing: 145
     MDFloatLayout:
-        MDRaisedButton:
-            pos_hint: {'center_x': .5, 'center_y':.5}
-            text: 'back to sign in'
-            on_press: 
-                root.manager.current = 'login_screen'
-                root.manager.transition.direction = 'right'
+        orientation: 'vertical'  
         MDFloatingActionButton:
+            id: add_button
             md_bg_color: app.theme_cls.primary_color
             pos_hint: {'center_x': .85, 'center_y': .1}
             icon: 'plus'
