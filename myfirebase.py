@@ -8,7 +8,7 @@ import json
 
 #before running install: pip install firebase_admin
 
-cred = credentials.Certificate("fridgenotes-f5c47-firebase-adminsdk-djtrj-d1eab8428a.json")
+cred = credentials.Certificate("fridgenotes-f5c47-firebase-adminsdk-djtrj-f230380d99.json")
 firebase_admin.initialize_app(cred)
 
 
@@ -42,7 +42,7 @@ class MyFirebase():
             self.db.collection(localId).document(u'initial').set(initial_data)
 
             #send back to login screen
-            app.root.current = 'login_screen'
+            App.get_running_app().root.current = 'login_screen'
 
         if sign_up_request.ok == False:
                 error_data = json.loads(sign_up_request.content.decode())
