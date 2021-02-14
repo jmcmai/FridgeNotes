@@ -47,7 +47,6 @@
                     pos_hint: {"center_x": .5, "top": .35}
                     on_release:
                         app.my_firebase.sign_up(new_email.text, new_password.text) 
-                        #app.add_user(root.ids['newname'].text, root.ids['newemail'].text, root.ids['newpassword'].text)
                 MDRaisedButton:
                     id: back
                     text: "Back"

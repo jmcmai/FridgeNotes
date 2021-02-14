@@ -57,11 +57,24 @@
                 #width: 200
                 #line_color_normal: 2, 1, 0, 1
                 #required: True
-
             MDRaisedButton:
                 text: 'Add Item'
                 pos_hint: {'center_x': 0.5, 'center_y': 0.2}
                 size_hint_x: None
                 on_release:
-                    app.show_item_data()
+                    app.update_database()
+            MDRaisedButton:
+                id: back
+                text: 'Back'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+                size_hint_x: None
+                on_release:
+                    root.manager.current: 'list_screen'
+                    root.manager.transition.direction: 'right'
+            MDLabel:
+                id: invalid_items
+                text: ''
+                theme_font_style: 'Button'
+                theme_text_color: 'Error'
+                pos_hint: {"center_x": .55, "top": .55}
             
