@@ -1,13 +1,7 @@
-# TODO: make functions/classes for button presses
-# TODO: make ui look a lot better
-# TODO: make a class for each item with data: name of item & expiry date
-# TODO: make create item screen
-
 #:include kv/loginscreen.kv
 #:include kv/signupscreen.kv
 #:include kv/listscreen.kv
 #:include kv/userinputscreen.kv
-
 
 <ScreenManagement>:
     LoginScreen:
@@ -28,38 +22,7 @@
     UserInputScreen:
         id: user_input_screen
         name: 'user_input_screen'
+    EditItemScreen:
+        id: edit_item_screen
+        name: 'edit_item_screen'
 
-
-<LoginScreenSuccess>:
-    GridLayout:
-        cols: 1
-        Button: 
-            text: "Logout"
-            on_press: root.log_out()
-        Label:
-            text: "How it's going?"
-        TextInput:
-            hint_text: "Not sure what is it?"
-        Button:
-            text: "Click me"
-        Label:
-            text:""
-
-<SignUpScreenSuccess>:
-    GridLayout:
-        cols:1
-        Label:
-            text: "Sign up successful!"
-        Button:
-            text: "Login page"
-            on_press: rppt.go_to_login()
-
-
-            
-
-
-
-        
-
-            
-        
